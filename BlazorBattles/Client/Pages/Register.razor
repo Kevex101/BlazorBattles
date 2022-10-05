@@ -1,5 +1,5 @@
 ﻿@page "/register"
-@inject IUnitService Unitservice
+@inject IUnitService UnitService
 @inject IJSRuntime JSRuntime
 @inject NavigationManager NavigationManager
 
@@ -34,7 +34,7 @@
     <div class="form-group">
         <label for="startUnit">Start Unit</label><br/>
         <InputRadioGroup id="startUnit" @bind-Value="user.StartUnitId" class="form-control">
-            @foreach (var unit in Unitservice.Units)
+            @foreach (var unit in UnitService.Units)
             {
                 <InputRadio Value="@unit.Id" /><span style="padding-left: 5px">@unit.Title</span><br/>
             }
@@ -59,6 +59,16 @@
 
 @code {
     UserRegister user = new UserRegister();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await UnitService.LoadUnitsAsync();
+    }
+
+    //protected override async Task OnInitializedAsync()
+    //{
+    //    await UnitService.LoadUnitsAsync();
+    //}
 
     void HandleRegistration()
     {
