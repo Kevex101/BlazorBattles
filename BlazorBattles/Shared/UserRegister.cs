@@ -13,7 +13,7 @@ namespace BlazorBattles.Shared
         public string Email { get; set; }
         [StringLength(16, ErrorMessage ="Your username is too long (16 maximum characters)")]
         public string Username { get; set; }
-        public string Bio { get; set; }
+        public string? Bio { get; set; }
         [Required, StringLength(100, MinimumLength = 6)]
         public string Password { get; set; }
         [Compare("Password", ErrorMessage = "Passwords do not match")]
