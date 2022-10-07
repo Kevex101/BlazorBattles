@@ -12,6 +12,7 @@ namespace BlazorBattles.Shared
         [Required, EmailAddress]
         public string Email { get; set; }
         [StringLength(16, ErrorMessage ="Your username is too long (16 maximum characters)")]
+        [Required]
         public string Username { get; set; }
         public string? Bio { get; set; }
         [Required, StringLength(100, MinimumLength = 6)]

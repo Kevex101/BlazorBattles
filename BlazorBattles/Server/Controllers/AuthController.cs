@@ -21,7 +21,7 @@ namespace BlazorBattles.Server.Controllers
         public async Task<IActionResult> Register(UserRegister request)
         {
             var response = await _authRepo.Register(
-                new Shared.User
+                new User
                 {
                     Username = request.Username,
                     Email = request.Email,
@@ -29,6 +29,20 @@ namespace BlazorBattles.Server.Controllers
                     DateOfBirth = request.DateOfBirth,
                     IsConfirmed = request.isConfirmed
                 }, request.Password);
+
+            if (!response.Success)
+            {
+                return BadRequest(response);
+            }
+
+            return Ok(response);
+        }
+
+        [HttpPost("login")]
+        public async Task<IActionResult> Login(UserLogin request)
+        {
+            var response = await _authRepo.Login(
+                request.Email, request.Password);
 
             if (!response.Success)
             {
