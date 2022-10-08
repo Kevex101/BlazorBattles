@@ -27,7 +27,7 @@ namespace BlazorBattles.Server.Controllers
         {
             var attacker = await _utilityService.GetUser();
             var opponent = await _context.Users.FindAsync(opponentId);
-            if(opponent == null || opponent.IsDeleted)
+            if (opponent == null || opponent.IsDeleted)
             {
                 return NotFound("Opponent not available.");
             }
@@ -35,7 +35,7 @@ namespace BlazorBattles.Server.Controllers
             var result = new BattleResult();
             await Fight(attacker, opponent, result);
 
-            return Ok();
+            return Ok(result);
         }
 
         private async Task Fight(User attacker, User opponent, BattleResult result)
